@@ -3,20 +3,24 @@
 ## Feature Testing Checklist
 
 ### ✅ Product Search (10 pts)
+
 Test the real-time product search functionality:
 
 1. **Basic Search**
+
    - [ ] Type "cleanser" in the search field
    - [ ] Verify products filter in real-time as you type
    - [ ] Verify only matching products are shown
 
 2. **Search Across Attributes**
+
    - [ ] Search by brand name (e.g., "CeraVe")
    - [ ] Search by product name (e.g., "Moisturizing")
    - [ ] Search by category keywords (e.g., "haircare")
    - [ ] Search by description keywords (e.g., "retinol")
 
 3. **Combined Filters**
+
    - [ ] Select a category, then use search
    - [ ] Verify both filters work together
    - [ ] Clear search and verify category filter still works
@@ -26,19 +30,23 @@ Test the real-time product search functionality:
    - [ ] Verify "No products found" message appears
 
 ### ✅ Web Search (10 pts)
+
 Test the AI web search capability:
 
 1. **Enable Web Search**
+
    - [ ] Check the "Enable Web Search" checkbox
    - [ ] Verify checkbox state is visible
 
 2. **Test Web Search Queries**
    Ask these questions with web search enabled:
+
    - [ ] "What are the latest L'Oréal products in 2025?"
    - [ ] "Find current reviews for CeraVe moisturizer"
    - [ ] "What are trending skincare ingredients?"
 
 3. **Loading States**
+
    - [ ] Verify loading message shows "Searching the web..."
    - [ ] Verify response includes current/timely information
 
@@ -49,13 +57,16 @@ Test the AI web search capability:
    - [ ] Compare response quality
 
 ### ✅ RTL Language Support (5 pts)
+
 Test right-to-left layout functionality:
 
 1. **Toggle RTL**
+
    - [ ] Click "Toggle RTL/LTR" button at the top
    - [ ] Verify entire layout flips to RTL
 
 2. **RTL Layout Elements**
+
    - [ ] Product cards are flipped (image on right)
    - [ ] Search field and category filter positions swap
    - [ ] Selected products tags flip direction
@@ -63,6 +74,7 @@ Test right-to-left layout functionality:
    - [ ] Icons and spacing adjust correctly
 
 3. **Persistence**
+
    - [ ] Switch to RTL mode
    - [ ] Refresh the page
    - [ ] Verify RTL mode is maintained
@@ -75,6 +87,7 @@ Test right-to-left layout functionality:
 ### 🎯 Integration Tests
 
 1. **Product Search + Selection**
+
    - [ ] Search for products
    - [ ] Click to select some products
    - [ ] Verify selected products list updates
@@ -82,6 +95,7 @@ Test right-to-left layout functionality:
    - [ ] Verify selected products remain selected
 
 2. **Web Search + Routine Generation**
+
    - [ ] Select 2-3 products
    - [ ] Enable web search
    - [ ] Generate routine
@@ -99,18 +113,21 @@ Test right-to-left layout functionality:
 ## Expected Results
 
 ### Product Search
+
 - Instant filtering as you type
 - Search across name, brand, category, description
 - Works with category filter
 - Clear "no results" message
 
 ### Web Search
+
 - Toggle visible and functional
 - Loading indicator changes based on toggle state
 - Responses should reference current information
 - May include URLs or citations (model-dependent)
 
 ### RTL Support
+
 - Complete layout flip
 - All text and elements properly aligned
 - Icons and spacing adjusted
@@ -119,17 +136,20 @@ Test right-to-left layout functionality:
 ## Common Issues
 
 ### Product Search Not Working
+
 - Check browser console for errors
 - Verify `productSearch` element exists in HTML
 - Ensure `filterProducts()` function is called
 
 ### Web Search Not Returning Current Info
+
 - Depends on OpenAI model capabilities
 - May need Cloudflare Worker update
 - Check API response format
 - See `CLOUDFLARE_WEBSEARCH_SETUP.md`
 
 ### RTL Layout Issues
+
 - Check browser support for `dir="rtl"`
 - Verify CSS RTL selectors are loaded
 - Clear browser cache if styles don't update

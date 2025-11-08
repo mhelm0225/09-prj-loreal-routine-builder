@@ -1,14 +1,17 @@
 # Cloudflare Worker Setup for Web Search
 
 ## Overview
+
 To enable real-time web search capabilities in your L'Oréal Routine Builder, you need to set up a Cloudflare Worker that can handle web search requests to OpenAI's API.
 
 ## Current Implementation
+
 The application currently uses the endpoint: `lorealbot.mhelm0225.workers.dev`
 
 ## Enabling Web Search
 
 ### Option 1: Using GPT-4 with Web Browsing (Recommended)
+
 To enable web search, your Cloudflare Worker should:
 
 1. Accept requests with web search parameters
@@ -36,16 +39,19 @@ export default {
 
     try {
       const body = await request.json();
-      
+
       // Forward request to OpenAI API
-      const response = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": `Bearer ${env.OPENAI_API_KEY}`,
-        },
-        body: JSON.stringify(body),
-      });
+      const response = await fetch(
+        "https://api.openai.com/v1/chat/completions",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${env.OPENAI_API_KEY}`,
+          },
+          body: JSON.stringify(body),
+        }
+      );
 
       const data = await response.json();
 

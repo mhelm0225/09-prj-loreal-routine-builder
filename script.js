@@ -170,14 +170,14 @@ function displayProducts(products) {
 /* Filter products based on category and search query */
 function filterProducts() {
   let filteredProducts = allProducts;
-  
+
   /* Filter by category if one is selected */
   if (currentCategory) {
     filteredProducts = filteredProducts.filter(
       (product) => product.category === currentCategory
     );
   }
-  
+
   /* Filter by search query if one exists */
   if (searchQuery) {
     const query = searchQuery.toLowerCase();
@@ -190,7 +190,7 @@ function filterProducts() {
       );
     });
   }
-  
+
   /* Show message if no products match */
   if (filteredProducts.length === 0) {
     productsContainer.innerHTML = `
@@ -208,7 +208,7 @@ categoryFilter.addEventListener("change", async (e) => {
   if (allProducts.length === 0) {
     await loadProducts();
   }
-  
+
   currentCategory = e.target.value;
   filterProducts();
 });
@@ -218,15 +218,15 @@ productSearch.addEventListener("input", async (e) => {
   if (allProducts.length === 0) {
     await loadProducts();
   }
-  
+
   searchQuery = e.target.value.trim();
-  
+
   /* If there's a search query, show all products (ignore category filter) */
   /* If no search query, respect the category filter */
   if (searchQuery && !currentCategory) {
     currentCategory = ""; // Show all categories when searching
   }
-  
+
   filterProducts();
 });
 
@@ -247,12 +247,12 @@ function addMessageToChat(message, isUser = false) {
 async function sendToOpenAI(messages, useWebSearch = false) {
   /* If web search is enabled, use gpt-4o with web search capability */
   const model = useWebSearch ? "gpt-4o" : "gpt-4o";
-  
+
   const requestBody = {
     model: model,
     messages: messages,
   };
-  
+
   /* Add web search parameter if enabled */
   if (useWebSearch) {
     /* Add instruction to the system message to search for current info */
@@ -261,7 +261,7 @@ async function sendToOpenAI(messages, useWebSearch = false) {
       lastMessage.content = `${lastMessage.content}\n\nPlease search the web for the most current information about L'Oréal products, beauty trends, or related topics. Include any relevant links or sources in your response.`;
     }
   }
-  
+
   const response = await fetch(`https://${API_KEY}`, {
     method: "POST",
     headers: {
@@ -269,7 +269,7 @@ async function sendToOpenAI(messages, useWebSearch = false) {
     },
     body: JSON.stringify(requestBody),
   });
-  
+
   const data = await response.json();
   return data.choices[0].message.content;
 }
@@ -355,7 +355,7 @@ chatForm.addEventListener("submit", async (e) => {
     const systemContent = useWebSearch
       ? "You are a helpful beauty and skincare advisor for L'Oréal. You help users with questions about skincare, haircare, makeup, fragrance, and related topics. When web search is enabled, provide current, up-to-date information about L'Oréal products and include relevant links or citations. Be friendly, professional, and knowledgeable."
       : "You are a helpful beauty and skincare advisor for L'Oréal. You help users with questions about skincare, haircare, makeup, fragrance, and related topics. Be friendly, professional, and knowledgeable.";
-    
+
     conversationHistory.push({
       role: "system",
       content: systemContent,
@@ -371,7 +371,9 @@ chatForm.addEventListener("submit", async (e) => {
   /* Show loading indicator */
   const loadingDiv = document.createElement("div");
   loadingDiv.className = "chat-message ai-message loading";
-  loadingDiv.textContent = useWebSearch ? "Searching the web..." : "Thinking...";
+  loadingDiv.textContent = useWebSearch
+    ? "Searching the web..."
+    : "Thinking...";
   chatWindow.appendChild(loadingDiv);
   chatWindow.scrollTop = chatWindow.scrollHeight;
 
@@ -405,7 +407,7 @@ chatForm.addEventListener("submit", async (e) => {
 languageToggle.addEventListener("click", () => {
   const html = document.documentElement;
   const currentDir = html.getAttribute("dir");
-  
+
   if (currentDir === "rtl") {
     /* Switch to LTR (Left-to-Right) */
     html.setAttribute("dir", "ltr");
