@@ -1,2 +1,3 @@
 # Secrets file containing API keys
-secrets.js
+# Note: secrets.js is safe to commit since it only contains the Cloudflare Worker endpoint
+# secrets.js
